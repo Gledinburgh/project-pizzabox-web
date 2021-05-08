@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using PizzaBox.Storing;
 using PizzaBox.Domain.Models;
 using System.Linq;
+using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Client.Models
 {
@@ -17,8 +18,8 @@ namespace PizzaBox.Client.Models
 
     [Required(ErrorMessage = "Need to Select a Pizza")]
     [Range(0, 50)]
-    public List<Pizza> Pizzas { get; set; }
-    public List<Pizza> SelectedPizzas { get; set; }
+    public List<APizza> Pizzas { get; set; }
+    public List<APizza> SelectedPizzas { get; set; }
 
     public void Load(UnitOfWork unitOfWork)
     {
