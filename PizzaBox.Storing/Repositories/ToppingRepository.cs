@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Storing.Repositories
 {
-  public class PizzaRepository : IRepository<APizza>
+  public class ToppingRepository : IRepository<Topping>
   {
     private readonly PizzaBoxContext _context;
 
-    public PizzaRepository(PizzaBoxContext context)
+    public ToppingRepository(PizzaBoxContext context)
     {
       _context = context;
     }
@@ -24,12 +23,12 @@ namespace PizzaBox.Storing.Repositories
       throw new System.NotImplementedException();
     }
 
-    public IEnumerable<APizza> Read(Func<APizza, bool> filter)
+    public IEnumerable<Topping> Read(Func<Topping, bool> filter)
     {
-      return _context.Pizzas;
+      return _context.Toppings;
     }
 
-    public APizza Update()
+    public Topping Update()
     {
       throw new System.NotImplementedException();
     }

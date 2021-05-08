@@ -6,6 +6,7 @@ namespace PizzaBox.Domain.Models
   public class Size : AComponent
   {
     public static List<string> sizes = new List<string> { "Small", "Medium", "Large", "Eating Challange(XXXL)" };
+    public ICollection<APizza> Pizzas { get; set; }
 
     public Size() { }
     public Size(string size)

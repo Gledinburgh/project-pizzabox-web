@@ -21,7 +21,7 @@ namespace PizzaBox.Client.Controllers
     public IActionResult Index()
     {
       // return View();
-      ViewBag.Order = new OrderViewModel();
+
       return View("index", new OrderViewModel());
     }
 

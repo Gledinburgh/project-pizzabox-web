@@ -9,8 +9,6 @@ namespace PizzaBox.Storing.Repositories
   {
     private readonly PizzaBoxContext _context;
 
-    public delegate bool CrustDelegate(Crust crust);
-
     public CrustRepository(PizzaBoxContext context)
     {
       _context = context;

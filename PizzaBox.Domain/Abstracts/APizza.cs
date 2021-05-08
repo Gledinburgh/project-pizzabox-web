@@ -21,17 +21,9 @@ namespace PizzaBox.Domain.Abstracts
     protected virtual void Factory()
     {
       AddName();
-      AddCrust();
-      AddSize();
-      AddToppings();
     }
 
     protected abstract void AddName();
-    protected abstract void AddCrust();
-    protected abstract void AddSize();
-
-    protected abstract void AddToppings();
-
 
     public override string ToString()
     {
