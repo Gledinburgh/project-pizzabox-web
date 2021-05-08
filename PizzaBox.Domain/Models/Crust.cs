@@ -1,14 +1,16 @@
+using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
 {
-  public class Crust : AEntity
+  public class Crust : AComponent
   {
-    public string Name { get; set; }
-
-    public override string ToString()
+    public static List<string> crustsOptions = new List<string> { "Thin", "Stuffed", "Original" };
+    public ICollection<APizza> Pizzas { get; set; }
+    public Crust(string name)
     {
-      return $"{Name}";
+      Name = name;
     }
+    public Crust() { }
   }
 }

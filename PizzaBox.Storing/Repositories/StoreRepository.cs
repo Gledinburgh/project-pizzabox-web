@@ -6,8 +6,15 @@ using System;
 
 namespace PizzaBox.Storing.Repositories
 {
+
   public class StoreRepository : IRepository<AStore>
   {
+    private readonly PizzaBoxContext _context;
+
+    public StoreRepository(PizzaBoxContext context)
+    {
+      _context = context;
+    }
     public bool Create()
     {
       throw new System.NotImplementedException();
