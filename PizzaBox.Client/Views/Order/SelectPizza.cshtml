@@ -1,4 +1,4 @@
-@model PizzaBox.Client.Models.PizzaViewModel
+@model PizzaBox.Client.Models.OrderViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container">
@@ -8,8 +8,8 @@
     <span class="col-sm"></span>
   </div>
   <div>
-    <form class="row">
-      @foreach (var pizza in Model.PizzaList)
+    <form method="post" action="confirmpizza" class="row">
+      @foreach (var pizza in Model.Pizzas)
       {
         <span class="col-sm-6">
 
@@ -26,9 +26,8 @@
               }
               <p class="card-text">Price: $@pizza.PizzaPrice()</p>
 
-              <input method="post" asp-for="SelectedPizza" value="@pizza.Name" type="submit"
-              class="col-sm btn btn-outline-primary" asp-action="confirmPizza">
-              <label class="form-check-label" asp-for="SelectedPizza" />
+              <input asp-for="SelectedPizzaName" value="@pizza.Name" type="submit" class="col-sm btn btn-outline-primary">
+              <label class="form-check-label" for="@pizza.Name" />
             </div>
           </div>
         </span>

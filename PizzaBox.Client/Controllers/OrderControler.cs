@@ -21,20 +21,21 @@ namespace PizzaBox.Client.Controllers
     }
     [HttpPost]
     [HttpGet]
-    public IActionResult SelectPizza(PizzaViewModel pizzas)
+    public IActionResult SelectPizza(CustomerViewModel customer, OrderViewModel order)
     {
-      pizzas.Load(_unitOfWork);
-      return View("SelectPizza", pizzas);
+      System.Console.WriteLine("customer in OrderControler:" + customer.SelectedCustomer);
+      order.Load(_unitOfWork);
+      return View("SelectPizza", order);
     }
     public IActionResult SelectStore(OrderViewModel order)
     {
       order.Load(_unitOfWork);
       return View("SelectStore", order);
     }
-    public IActionResult NextSteps(OrderViewModel order, PizzaViewModel pizza)
+    public IActionResult NextSteps(CustomerViewModel customer, OrderViewModel order, PizzaViewModel pizza)
     {
-
-      order.CurrentPizza = _unitOfWork.Pizzas.Read(p => p.Name == pizza.SelectedPizza).First();
+      System.Console.WriteLine("customer: " + customer.SelectedCustomer);
+      order.CurrentPizza = _unitOfWork.Pizzas.Read(p => p.Name == order.SelectedPizzaName).First();
       order.CurrentPizza.Size = _unitOfWork.Sizes.Read(s => s.Name == order.SelectedSize.Name).First();
       order.CurrentPizza.Crust = _unitOfWork.Crusts.Read(c => c.Name == order.SelectedCrust.Name).First();
 
@@ -43,7 +44,7 @@ namespace PizzaBox.Client.Controllers
         order.SelectedPizzas = new List<APizza>();
       }
       order.SelectedPizzas.Add(order.CurrentPizza);
-      System.Console.WriteLine("Selected pizza:" + pizza.SelectedPizza);
+      System.Console.WriteLine("Selected pizza:" + order.SelectedPizzaName);
       System.Console.WriteLine("Current Order:" + order.SelectedPizzas[0].Name);
       return View("NextSteps", order);
     }

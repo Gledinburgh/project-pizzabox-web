@@ -13,16 +13,16 @@ namespace PizzaBox.Client.Controllers
     private readonly UnitOfWork _unitOfWork;
 
     [HttpGet]
-    public IActionResult Name()
+    public IActionResult Name(CustomerViewModel customer)
     {
-      return View("Name");
+      return View("Name", customer);
     }
     [HttpPost]
-    public IActionResult StepOne(OrderViewModel order)
+    public IActionResult StepOne(CustomerViewModel customer)
     {
-      order.SelectedPizzas = new List<APizza>();
-      order.Load(_unitOfWork);
-      return View("StepOne", order);
+      System.Console.WriteLine("customer in CustomerControler:" + customer.SelectedCustomer);
+
+      return View("StepOne", customer);
     }
     [HttpPost]
     public IActionResult validate(CustomerViewModel customer)
