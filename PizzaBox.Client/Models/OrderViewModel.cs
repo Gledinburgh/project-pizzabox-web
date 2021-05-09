@@ -18,7 +18,6 @@ namespace PizzaBox.Client.Models
 
     [Required(ErrorMessage = "Need to Select a crust")]
     [DataType(DataType.Text)]
-    public Crust SelectedCrust { get; set; }
     public Customer SelectedCustomer { get; set; }
 
     [Required(ErrorMessage = "Need to Select a Pizza")]
@@ -26,6 +25,9 @@ namespace PizzaBox.Client.Models
 
     [Required(ErrorMessage = "Need to Select a store")]
     public AStore SelectedStore { get; set; }
+    public Size SelectedSize { get; set; }
+    public Crust SelectedCrust { get; set; }
+    public List<string> SelectedToppings { get; set; }
 
 
     public void Load(UnitOfWork unitOfWork)

@@ -32,6 +32,7 @@ namespace PizzaBox.Client.Controllers
     }
     public IActionResult ConfirmPizza(OrderViewModel order)
     {
+      order.Load(_unitOfWork);
       return View("CustomizePizza", order);
     }
     public OrderController(UnitOfWork unitOfWork)
