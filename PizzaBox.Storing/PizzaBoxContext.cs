@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
@@ -8,7 +9,7 @@ namespace PizzaBox.Storing
 {
   public class PizzaBoxContext : DbContext
   {
-
+    // public Dictionary<string, object> APizzaTopping { get; set; }
     public DbSet<Crust> Crusts { get; set; }
     public DbSet<Topping> Toppings { get; set; }
     public DbSet<Size> Sizes { get; set; }
@@ -43,13 +44,12 @@ namespace PizzaBox.Storing
     {
       builder.Entity<MeatPizza>().HasData(new MeatPizza[]
      {
-          new MeatPizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 2}
+          new MeatPizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 2 }
      });
       builder.Entity<VeggiePizza>().HasData(new VeggiePizza[]
       {
-          new VeggiePizza() { EntityId = 2, CrustEntityId = 1, SizeEntityId = 2}
+          new VeggiePizza() { EntityId = 2, CrustEntityId = 1, SizeEntityId = 2,},
       });
-
 
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
       {

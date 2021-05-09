@@ -1,0 +1,17 @@
+@model CustomerViewModel
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>Good to see you, @Model.SelectedCustomer!</h1>
+    <span class="col-sm"></span>
+  </div>
+  <form>
+    <div method="post" class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="selectpizza">Order
+        Pizza</button>
+    </div>
+    <div class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary">View Order History</button>
+    </div>
+  </form>

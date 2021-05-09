@@ -14,8 +14,25 @@ namespace PizzaBox.Client.Controllers
     [ValidateAntiForgeryToken]
     public IActionResult submit(OrderViewModel order)
     {
-      ViewBag.SelectedCrust = order.SelectedCrust;
       return View("index", _unitOfWork);
+    }
+    [HttpPost]
+    [HttpGet]
+    public IActionResult SelectPizza(PizzaViewModel pizzas)
+    {
+      pizzas.Load(_unitOfWork);
+      return View("SelectPizza", pizzas);
+    }
+    //test
+    [HttpPost]
+    [HttpGet]
+    public IActionResult NewOrder(OrderViewModel order)
+    {
+      return View("NewOrder", order);
+    }
+    public IActionResult ConfirmPizza(OrderViewModel order)
+    {
+      return View("CustomizePizza", order);
     }
     public OrderController(UnitOfWork unitOfWork)
     {

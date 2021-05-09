@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
@@ -26,7 +27,10 @@ namespace PizzaBox.Storing.Repositories
 
     public IEnumerable<APizza> Read(Func<APizza, bool> filter)
     {
-      return _context.Pizzas;
+      var pizzas = _context.Pizzas
+                  .Include(p => p.Crust)
+                  .Include(p => p.Size);
+      return pizzas;
     }
 
     public APizza Update()

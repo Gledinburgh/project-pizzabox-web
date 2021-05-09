@@ -1,0 +1,16 @@
+@model PizzaBox.Client.Models.OrderViewModel
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>Custom Pizza</h1>
+    <span class="col-sm"></span>
+  </div>
+  <div class="row">
+    <div>Size</div>
+    @foreach (var size in Model.Sizes)
+    {
+      <div>@size</div>
+    }
+  </div>
+</div>

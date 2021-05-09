@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
+using PizzaBox.Storing;
+using PizzaBox.Storing.Repositories;
 
 namespace PizzaBox.Client.Controllers
 {
+  [Route("[controller]/[action]")]
   public class HomeController : Controller
   {
-    private readonly ILogger<HomeController> _logger;
+    private readonly UnitOfWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(UnitOfWork unitOfWork)
     {
-      _logger = logger;
+      _unitOfWork = unitOfWork;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
-      // return View();
+      var order = new OrderViewModel();
 
-      return View("index", new OrderViewModel());
+      order.Load(_unitOfWork);
+
+      return View("order", order);
     }
-
-    public IActionResult Privacy()
+    [HttpGet]
+    public IActionResult Welcome()
     {
-      return View();
-    }
+      var order = new OrderViewModel();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+      return View("welcome", order);
     }
   }
 }

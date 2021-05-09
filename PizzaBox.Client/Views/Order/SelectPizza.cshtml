@@ -1,0 +1,40 @@
+@model PizzaBox.Client.Models.PizzaViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>Select A Pizza</h1>
+    <span class="col-sm"></span>
+  </div>
+  <div>
+    <form class="row">
+      @foreach (var pizza in Model.PizzaList)
+      {
+        <span class="col-sm-6">
+
+          <div class="card" style="">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">@pizza.Name</h5>
+              <p class="card-text">Crust: @pizza.Crust</p>
+              <p class="card-text">Size: @pizza.Size</p>
+              <p class="card-text">Toppings:</p>
+              @foreach (var t in pizza.Toppings)
+              {
+                <p class="card-text"> @t.Name</p>
+              }
+              <p class="card-text">Price: $@pizza.PizzaPrice()</p>
+
+              <input method="post" asp-for="SelectedPizza" value="@pizza.Name" type="submit"
+              class="col-sm btn btn-outline-primary" asp-action="confirmPizza">
+            </div>
+          </div>
+        </span>
+
+      }
+    </form>
+
+  </div>
+
+</div>

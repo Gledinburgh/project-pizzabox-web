@@ -5,7 +5,6 @@ namespace PizzaBox.Domain.Models
 {
   public class Topping : AComponent
   {
-    public static List<string> toppings = new List<string> { "peppers", "onions", "olives" };
     public ICollection<APizza> Pizzas { get; set; }
     public Topping(string name)
     {
