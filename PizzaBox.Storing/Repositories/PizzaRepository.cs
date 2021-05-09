@@ -37,5 +37,10 @@ namespace PizzaBox.Storing.Repositories
     {
       throw new System.NotImplementedException();
     }
+
+    public APizza Where()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

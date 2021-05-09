@@ -32,5 +32,9 @@ namespace PizzaBox.Storing.Repositories
     {
       throw new System.NotImplementedException();
     }
+    public Order NewOrder()
+    {
+      return new Order();
+    }
   }
 }

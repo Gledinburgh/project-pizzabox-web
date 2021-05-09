@@ -3,6 +3,7 @@ using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 using PizzaBox.Domain.Abstracts;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace PizzaBox.Storing.Repositories
 {
@@ -27,7 +28,9 @@ namespace PizzaBox.Storing.Repositories
 
     public IEnumerable<AStore> Read(Func<AStore, bool> filter)
     {
-      throw new System.NotImplementedException();
+      var stores = _context.Stores;
+
+      return stores;
     }
 
     public AStore Update()

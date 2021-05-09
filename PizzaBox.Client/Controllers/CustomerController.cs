@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
+using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 
 namespace PizzaBox.Client.Controllers
@@ -15,10 +18,11 @@ namespace PizzaBox.Client.Controllers
       return View("Name");
     }
     [HttpPost]
-    public IActionResult StepOne(CustomerViewModel customer)
+    public IActionResult StepOne(OrderViewModel order)
     {
-      //set customer to be customer.SelectedCustomer
-      return View("StepOne", customer);
+      order.SelectedPizzas = new List<APizza>();
+      order.Load(_unitOfWork);
+      return View("StepOne", order);
     }
     [HttpPost]
     public IActionResult validate(CustomerViewModel customer)

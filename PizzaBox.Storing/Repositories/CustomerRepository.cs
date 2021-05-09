@@ -7,6 +7,12 @@ namespace PizzaBox.Storing.Repositories
 {
   public class CustomerRepository : IRepository<Customer>
   {
+    private readonly PizzaBoxContext _context;
+
+    public CustomerRepository(PizzaBoxContext context)
+    {
+      _context = context;
+    }
     public bool Create()
     {
       throw new System.NotImplementedException();

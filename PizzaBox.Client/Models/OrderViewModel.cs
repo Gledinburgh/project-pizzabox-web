@@ -4,12 +4,15 @@ using PizzaBox.Storing;
 using PizzaBox.Domain.Models;
 using System.Linq;
 using PizzaBox.Domain.Abstracts;
-
+using PizzaBox.Domain.Models.Pizzas;
 
 namespace PizzaBox.Client.Models
 {
   public class OrderViewModel
   {
+    public Order CurrentOrder { get; set; }
+    public APizza CurrentPizza { get; set; }
+    public string SelectedPizzaName { get; set; }
     public List<Crust> Crusts { get; set; }
     public List<APizza> Pizzas { get; set; }
     public List<AStore> Stores { get; set; }
@@ -32,10 +35,13 @@ namespace PizzaBox.Client.Models
 
     public void Load(UnitOfWork unitOfWork)
     {
+      Pizzas = unitOfWork.Pizzas.Read(c => c.EntityId < 4).ToList();
       Crusts = unitOfWork.Crusts.Read(c => c.EntityId >= 0).ToList();
       Toppings = unitOfWork.Toppings.Read(c => c.EntityId >= 0).ToList();
       Sizes = unitOfWork.Sizes.Read(c => c.EntityId >= 0).ToList();
+      Stores = unitOfWork.Stores.Read(c => c.EntityId >= 0).ToList();
     }
+
 
     public IEnumerable<ValidationResult> ValidationResults(ValidationContext validation)
     {

@@ -1,0 +1,54 @@
+@model OrderViewModel
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>What Next? @Model.SelectedCustomer!</h1>
+    <span class="col-sm"></span>
+  </div>
+
+  <div class="row">
+    <div>Your current Order</div>
+    @foreach (var pizza in Model.SelectedPizzas)
+    {
+      <span class="col-sm-6">
+
+        <div class="card" style="">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">@pizza.Name</h5>
+            <p class="card-text">Crust: @pizza.Crust</p>
+            <p class="card-text">Size: @pizza.Size</p>
+            <p class="card-text">Toppings:</p>
+            @foreach (var t in pizza.Toppings)
+            {
+              <p class="card-text"> @t.Name</p>
+            }
+            @* <p class="card-text">Price: $@pizza.PizzaPrice()</p> *@
+          </div>
+        </div>
+      </span>
+    }
+  </div>
+
+  <form>
+    <div method="post" class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order"
+        asp-action="selectpizza">Review Order</button>
+    </div>
+    <div method="post" class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="selectpizza">Place
+        Current Order</button>
+    </div>
+    <div method="post" class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order"
+        asp-action="selectpizza">Create New Order</button>
+    </div>
+    <div method="post" class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order"
+        asp-action="selectpizza">Modify Order</button>
+    </div>
+    <div class="row">
+      <button type="submit" class="col-sm btn btn-outline-primary">View Order History</button>
+    </div>
+  </form>

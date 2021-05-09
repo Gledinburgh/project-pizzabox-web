@@ -50,6 +50,10 @@ namespace PizzaBox.Storing
       {
           new VeggiePizza() { EntityId = 2, CrustEntityId = 1, SizeEntityId = 2,},
       });
+      builder.Entity<CustomPizza>().HasData(new CustomPizza[]
+      {
+          new CustomPizza() { EntityId = 3, CrustEntityId = 1, SizeEntityId = 2,},
+      });
 
       builder.Entity<ChicagoStore>().HasData(new ChicagoStore[]
       {
