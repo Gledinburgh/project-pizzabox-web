@@ -21,7 +21,7 @@ namespace PizzaBox.Client.Models
 
     [Required(ErrorMessage = "Need to Select a crust")]
     [DataType(DataType.Text)]
-    public Customer SelectedCustomer { get; set; }
+    public string SelectedCustomer { get; set; }
 
     [Required(ErrorMessage = "Need to Select a Pizza")]
     public List<APizza> SelectedPizzas { get; set; }

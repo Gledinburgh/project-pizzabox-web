@@ -1,4 +1,4 @@
-@model CustomerViewModel
+@model OrderViewModel
 
 <div class="container">
   <div class="h2 row">
@@ -7,6 +7,7 @@
     <span class="col-sm"></span>
   </div>
   <form>
+    <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
     <div method="post" class="row">
       <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="selectpizza">New
         Order</button>

@@ -21,9 +21,8 @@ namespace PizzaBox.Client.Controllers
     }
     [HttpPost]
     [HttpGet]
-    public IActionResult SelectPizza(CustomerViewModel customer, OrderViewModel order)
+    public IActionResult SelectPizza(OrderViewModel order)
     {
-      System.Console.WriteLine("customer in OrderControler:" + customer.SelectedCustomer);
       order.Load(_unitOfWork);
       return View("SelectPizza", order);
     }
@@ -32,9 +31,10 @@ namespace PizzaBox.Client.Controllers
       order.Load(_unitOfWork);
       return View("SelectStore", order);
     }
-    public IActionResult NextSteps(CustomerViewModel customer, OrderViewModel order, PizzaViewModel pizza)
+    public IActionResult NextSteps(OrderViewModel order)
     {
-      System.Console.WriteLine("customer: " + customer.SelectedCustomer);
+      order.Load(_unitOfWork);
+
       order.CurrentPizza = _unitOfWork.Pizzas.Read(p => p.Name == order.SelectedPizzaName).First();
       order.CurrentPizza.Size = _unitOfWork.Sizes.Read(s => s.Name == order.SelectedSize.Name).First();
       order.CurrentPizza.Crust = _unitOfWork.Crusts.Read(c => c.Name == order.SelectedCrust.Name).First();
@@ -44,8 +44,6 @@ namespace PizzaBox.Client.Controllers
         order.SelectedPizzas = new List<APizza>();
       }
       order.SelectedPizzas.Add(order.CurrentPizza);
-      System.Console.WriteLine("Selected pizza:" + order.SelectedPizzaName);
-      System.Console.WriteLine("Current Order:" + order.SelectedPizzas[0].Name);
       return View("NextSteps", order);
     }
     //test
@@ -58,10 +56,23 @@ namespace PizzaBox.Client.Controllers
     }
     public IActionResult ConfirmPizza(OrderViewModel order)
     {
+
       order.Load(_unitOfWork);
       return View("CustomizePizza", order);
+
     }
 
+    // CUSTOMER ACTIONS
+
+    public IActionResult Name(OrderViewModel order)
+    {
+      return View("Name", order);
+    }
+    [HttpPost]
+    public IActionResult StepOne(OrderViewModel order)
+    {
+      return View("StepOne", order);
+    }
 
     public OrderController(UnitOfWork unitOfWork)
     {
