@@ -12,9 +12,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  package:
+  env:
+    DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN}}
+    DOCKER_USER: ${{ secrets.DOCKER_USER}}
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
+      - run: docker login
+      - run: docker image build -f Dockerfile -t pizzabox .
+      - run: docker image tag pizzabox gledinburgh/pizzabox
+      - run: docker push gledinburgh/pizzabox
+      - run: docker logout

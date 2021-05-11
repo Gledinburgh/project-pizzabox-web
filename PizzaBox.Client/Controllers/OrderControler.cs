@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
 using PizzaBox.Domain.Abstracts;
+using PizzaBox.Domain.Models;
 using PizzaBox.Storing;
 
 namespace PizzaBox.Client.Controllers
@@ -35,20 +36,37 @@ namespace PizzaBox.Client.Controllers
     {
       order.Load(_unitOfWork);
 
-      order.CurrentPizza = _unitOfWork.Pizzas.Read(p => p.Name == order.SelectedPizzaName).First();
-      order.CurrentPizza.Size = _unitOfWork.Sizes.Read(s => s.Name == order.SelectedSize.Name).First();
-      order.CurrentPizza.Crust = _unitOfWork.Crusts.Read(c => c.Name == order.SelectedCrust.Name).First();
+      order.CurrentPizza = _unitOfWork.Pizzas.Read(p => p.EntityId >= 0).FirstOrDefault(p => p.Name == order.SelectedPizzaName);
+      order.CurrentPizza.Size = _unitOfWork.Sizes.Read(c => c.EntityId >= 0).FirstOrDefault(c => c.Name == order.SelectedSize);
+      order.CurrentPizza.Crust = _unitOfWork.Crusts.Read(c => c.EntityId >= 0).FirstOrDefault(c => c.Name == order.SelectedCrust);
 
-      if (order.SelectedPizzas == null)
+      var newCustomer = new Customer { Name = order.SelectedCustomer };
+      _unitOfWork.Customers.Create(newCustomer);
+      _unitOfWork.Save();
+
+      var customer = _unitOfWork.Customers.Read(c => c.EntityId >= 0).FirstOrDefault(c => c.Name == order.SelectedCustomer);
+      var CustomerId = customer.EntityId;
+      var store = _unitOfWork.Stores.Read(s => s.EntityId >= 0).FirstOrDefault(s => s.Name == order.SelectedStore);
+      var newOrder = new Order()
       {
-        order.SelectedPizzas = new List<APizza>();
-      }
-      order.SelectedPizzas.Add(order.CurrentPizza);
+        Store = store,
+        Customer = customer,
+        Pizzas = new List<APizza> { order.CurrentPizza }
+      };
+      _unitOfWork.Orders.Create(newOrder);
+      _unitOfWork.Save();
+
       return View("NextSteps", order);
     }
-    //test
+
     [HttpPost]
     [HttpGet]
+    public IActionResult placeorder(OrderViewModel order)
+    {
+      order.Load(_unitOfWork);
+      order.CustomerOrders = _unitOfWork.Orders.Read(o => o.CustomerEntityId == order.CustomerId).ToList();
+      return View("OrderPlaced", order);
+    }
     public IActionResult NewOrder(OrderViewModel order)
     {
       order.Load(_unitOfWork);

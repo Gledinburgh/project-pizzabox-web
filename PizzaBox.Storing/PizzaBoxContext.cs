@@ -16,6 +16,7 @@ namespace PizzaBox.Storing
     public DbSet<APizza> Pizzas { get; set; }
     public DbSet<AStore> Stores { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     public PizzaBoxContext(DbContextOptions options) : base(options) { }
 

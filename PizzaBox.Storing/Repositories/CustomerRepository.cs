@@ -13,9 +13,10 @@ namespace PizzaBox.Storing.Repositories
     {
       _context = context;
     }
-    public bool Create()
+    public bool Create(Customer customer)
     {
-      throw new System.NotImplementedException();
+      _context.Customers.Add(customer);
+      return true;
     }
 
     public bool Delete()
@@ -25,7 +26,7 @@ namespace PizzaBox.Storing.Repositories
 
     public IEnumerable<Customer> Read(Func<Customer, bool> filter)
     {
-      throw new System.NotImplementedException();
+      return _context.Customers;
     }
 
     public Customer Update()

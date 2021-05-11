@@ -3,41 +3,43 @@
 <div class="container">
   <div class="h2 row">
     <span class="col-sm"></span>
-    <h1>What Next? @Model.SelectedCustomer!</h1>
+    <h1>What Next?, @Model.SelectedCustomer! :D ☺</h1>
     <span class="col-sm"></span>
   </div>
 
   <div class="row">
     <div>Your current Order</div>
-    @foreach (var pizza in Model.SelectedPizzas)
-    {
-      <span class="col-sm-6">
 
-        <div class="card" style="">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">@pizza.Name</h5>
-            <p class="card-text">Crust: @pizza.Crust</p>
-            <p class="card-text">Size: @pizza.Size</p>
-            <p class="card-text">Toppings:</p>
-            @foreach (var t in pizza.Toppings)
-            {
-              <p class="card-text"> @t.Name</p>
-            }
-            @* <p class="card-text">Price: $@pizza.PizzaPrice()</p> *@
-          </div>
+    <span class="col-sm-6">
+      <div class="card" style="">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">@Model.CurrentPizza.Name</h5>
+          <p class="card-text">Crust: @Model.CurrentPizza.Crust</p>
+          <p class="card-text">Size: @Model.CurrentPizza.Size</p>
+          <p class="card-text">Toppings:</p>
+          @foreach (var t in Model.CurrentPizza.Toppings)
+          {
+            <p class="card-text"> @t.Name</p>
+          }
+          <p class="card-text">Price: $@Model.CurrentPizza.PizzaPrice()</p>
         </div>
-      </span>
-    }
+      </div>
+    </span>
+
   </div>
 
   <form>
+    <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
+    <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId">
+    <input type="hidden" asp-for="CurrentPizza" value="@Model.CurrentPizza">
+    <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
     <div method="post" class="row">
       <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order"
         asp-action="selectpizza">Review Order</button>
     </div>
     <div method="post" class="row">
-      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="selectpizza">Place
+      <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="placeorder">Place
         Current Order</button>
     </div>
     <div method="post" class="row">

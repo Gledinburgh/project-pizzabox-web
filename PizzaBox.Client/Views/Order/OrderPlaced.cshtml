@@ -4,20 +4,21 @@
 <div class="container">
   <div class="h2 row">
     <span class="col-sm"></span>
-    <h1>Select A Pizza</h1>
+    <h1>Your Order has been placed</h1>
     <span class="col-sm"></span>
   </div>
   <div>
-    <form method="post" action="confirmpizza" class="row">
-      <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
-      <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
-      @foreach (var pizza in Model.Pizzas)
+
+    @foreach (var order in Model.CustomerOrders)
+    {
+      @foreach (var pizza in order.Pizzas)
       {
         <span class="col-sm-6">
 
           <div class="card" style="">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
+              <h5 class="card-title">@order.Store.Name</h5>
               <h5 class="card-title">@pizza.Name</h5>
               <p class="card-text">Crust: @pizza.Crust</p>
               <p class="card-text">Size: @pizza.Size</p>
@@ -27,12 +28,11 @@
                 <p class="card-text"> @t.Name</p>
               }
               <p class="card-text">Price: $@pizza.PizzaPrice()</p>
-              <input asp-for="SelectedPizzaName" value="@pizza.Name" type="submit" class="col-sm btn btn-outline-primary">
 
             </div>
           </div>
         </span>
       }
-    </form>
+    }
   </div>
 </div>

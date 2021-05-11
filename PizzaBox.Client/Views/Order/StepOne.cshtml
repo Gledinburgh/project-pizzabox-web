@@ -8,6 +8,7 @@
   </div>
   <form>
     <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
+    <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
     <div method="post" class="row">
       <button type="submit" class="col-sm btn btn-outline-primary" asp-controller="order" asp-action="selectpizza">New
         Order</button>

@@ -10,26 +10,28 @@ namespace PizzaBox.Client.Models
 {
   public class OrderViewModel
   {
+    public List<Order> CustomerOrders { get; set; }
     public Order CurrentOrder { get; set; }
     public APizza CurrentPizza { get; set; }
-    public string SelectedPizzaName { get; set; }
     public List<Crust> Crusts { get; set; }
     public List<APizza> Pizzas { get; set; }
     public List<AStore> Stores { get; set; }
     public List<Size> Sizes { get; set; }
     public List<Topping> Toppings { get; set; }
+    public string SelectedPizzaName { get; set; }
 
-    [Required(ErrorMessage = "Need to Select a crust")]
-    [DataType(DataType.Text)]
     public string SelectedCustomer { get; set; }
+    public long CustomerId { get; set; }
 
     [Required(ErrorMessage = "Need to Select a Pizza")]
     public List<APizza> SelectedPizzas { get; set; }
 
     [Required(ErrorMessage = "Need to Select a store")]
-    public AStore SelectedStore { get; set; }
-    public Size SelectedSize { get; set; }
-    public Crust SelectedCrust { get; set; }
+    public string SelectedStore { get; set; }
+    public string SelectedSize { get; set; }
+    [Required(ErrorMessage = "Need to Select a crust")]
+    [DataType(DataType.Text)]
+    public string SelectedCrust { get; set; }
     public List<string> SelectedToppings { get; set; }
 
 

@@ -16,7 +16,7 @@ namespace PizzaBox.Storing.Repositories
     {
       _context = context;
     }
-    public bool Create()
+    public bool Create(AStore store)
     {
       throw new System.NotImplementedException();
     }

@@ -8,6 +8,7 @@
   </div>
 
   <form action="StepOne" method="POST" class="row">
+    <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
     @Html.AntiForgeryToken()
     <span class="col-sm"></span>
     <div class="form-group">

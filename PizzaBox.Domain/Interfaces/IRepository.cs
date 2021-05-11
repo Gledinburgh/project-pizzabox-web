@@ -5,7 +5,7 @@ namespace PizzaBox.Domain.Interfaces
 {
   public interface IRepository<T> where T : class
   {
-    bool Create();
+    bool Create(T entry);
     //update
     IEnumerable<T> Read(Func<T, bool> filter);
     T Update();
