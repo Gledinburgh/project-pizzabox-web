@@ -1,0 +1,56 @@
+@model OrderViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div class="h2 row">
+  <span class="col-sm"></span>
+  <h1>Choose Your Options</h1>
+  <span class="col-sm"></span>
+</div>
+<form action="nextsteps" method="post">
+  <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
+  <input type="hidden" asp-for="SelectedPizzaName" value="@Model.SelectedPizzaName">
+  <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
+
+  <h2 class="list-group-item-secondary">@Model.SelectedPizzaName</h2>
+  <h3 class="list-group-item-secondary">Size</h3>
+  <div class="list-group list-group-flush">
+
+    @foreach (var size in Model.Sizes)
+    {
+      <div>
+        <label class="form-check-label list-group-item">
+          <input asp-for="SelectedSize" value="@size" class="form-check-input me-1" type="radio">
+          <label class="form-check-label" for="@size">@size</label>
+      </div>
+    }
+  </div>
+
+  <div class="list-group list-group-flush">
+    <h3 class="list-group-item-secondary">Crust</h3>
+    @foreach (var crust in Model.Crusts)
+    {
+      <div>
+        <label class="form-check-label list-group-item">
+          <input asp-for="SelectedCrust" value="@crust" class="form-check-input me-1" type="radio">
+          <label class="form-check-label" for="@crust">@crust</label>
+      </div>
+    }
+  </div>
+
+  <div class="list-group list-group-flush">
+    <h3 class="list-group-item-secondary">Toppings</h3>
+    @foreach (var topping in Model.Toppings)
+    {
+      <label class="list-group-item form-check-label" for="@topping">
+        <input value="@topping" name="SelectedToppings" class="form-check-input me-1" type="checkbox" id=@topping>
+        @topping
+      </label>
+    }
+  </div>
+
+  <div class="row">
+    <button class="btn btn-primary" type="submit">Add To Order</button>
+  </div>
+
+</form>

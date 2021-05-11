@@ -1,0 +1,38 @@
+@model OrderViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>Select A Pizza</h1>
+    <span class="col-sm"></span>
+  </div>
+  <div>
+    <form method="post" action="confirmpizza" class="row">
+      <input type="hidden" asp-for="SelectedCustomer" value="@Model.SelectedCustomer">
+      <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
+      @foreach (var pizza in Model.Pizzas)
+      {
+        <span class="col-sm-6">
+
+          <div class="card" style="">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">@pizza.Name</h5>
+              <p class="card-text">Crust: @pizza.Crust</p>
+              <p class="card-text">Size: @pizza.Size</p>
+              <p class="card-text">Toppings:</p>
+              @foreach (var t in pizza.Toppings)
+              {
+                <p class="card-text"> @t.Name</p>
+              }
+              <p class="card-text">Price: $@pizza.PizzaPrice()</p>
+              <input asp-for="SelectedPizzaName" value="@pizza.Name" type="submit" class="col-sm btn btn-outline-primary">
+
+            </div>
+          </div>
+        </span>
+      }
+    </form>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@model PizzaBox.Client.Models.OrderViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>Select A Store</h1>
+    <span class="col-sm"></span>
+  </div>
+  <div>
+    <form class="row">
+      @foreach (var store in Model.Stores)
+      {
+        <span class="col-sm-6">
+
+          <div class="card" style="">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">@store.Name</h5>
+              <p class="card-text">Adress: Street, City, State, Zip</p>
+              <p class="card-text">Pone Number: xxx-xxx-xxxx </p>
+
+
+              <input asp-action="name" method="post" asp-for="SelectedStore" value="@store.Name" type="submit"
+              class="col-sm btn btn-outline-primary">
+              <label class="form-check-label" asp-for="SelectedStore" />
+            </div>
+          </div>
+        </span>
+
+      }
+    </form>
+
+  </div>
+
+</div>

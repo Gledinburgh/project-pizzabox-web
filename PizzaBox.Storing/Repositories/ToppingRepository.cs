@@ -13,7 +13,7 @@ namespace PizzaBox.Storing.Repositories
     {
       _context = context;
     }
-    public bool Create()
+    public bool Create(Topping topping)
     {
       throw new System.NotImplementedException();
     }

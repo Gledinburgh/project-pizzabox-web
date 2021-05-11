@@ -9,7 +9,7 @@
     </div>
     <form asp-controller="order" method="post" asp-action="submit" class="form-check">
         @Html.AntiForgeryToken();
-        @foreach (var item in Model.Crusts)
+        @foreach (var item in Model.Sizes)
         {
             <div>
                 <label class="form-check-label">@item</label>

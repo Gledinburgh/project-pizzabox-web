@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PizzaBox.Domain.Interfaces;
 using PizzaBox.Domain.Models;
 
@@ -13,9 +14,10 @@ namespace PizzaBox.Storing.Repositories
     {
       _context = context;
     }
-    public bool Create()
+    public bool Create(Order order)
     {
-      throw new System.NotImplementedException();
+      _context.Orders.Add(order);
+      return true;
     }
 
     public bool Delete()
@@ -25,12 +27,17 @@ namespace PizzaBox.Storing.Repositories
 
     public IEnumerable<Order> Read(Func<Order, bool> filter)
     {
-      throw new System.NotImplementedException();
+      var orders = _context.Orders;
+      return orders;
     }
 
     public Order Update()
     {
       throw new System.NotImplementedException();
+    }
+    public Order NewOrder()
+    {
+      return new Order();
     }
   }
 }

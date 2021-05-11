@@ -1,0 +1,9 @@
+@model PizzaBox.Client.Models.OrderViewModel
+<h1>Order</h1>
+@foreach (var item in Model.Sizes)
+{
+  <div class="form-check">
+  <input class="form-check-input" type="radio" asp-for="SelectedCrust" value="@item">
+  <label class="form-check-label" for="@item">@item</label>
+</div>
+}

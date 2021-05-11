@@ -1,0 +1,20 @@
+@model OrderViewModel
+
+<div class="container">
+  <div class="h2 row">
+    <span class="col-sm"></span>
+    <h1>What is your name?</h1>
+    <span class="col-sm"></span>
+  </div>
+
+  <form action="StepOne" method="POST" class="row">
+    <input type="hidden" asp-for="SelectedStore" value="@Model.SelectedStore">
+    @Html.AntiForgeryToken()
+    <span class="col-sm"></span>
+    <div class="form-group">
+      <label></label>
+      <input asp-for="SelectedCustomer" class="form-control" aria-describedby="NameEntry" placeholder="name">
+    </div>
+    <span class="col-sm"></span>
+  </form>
+</div>

@@ -7,8 +7,8 @@ namespace PizzaBox.Storing
   {
     private readonly PizzaBoxContext _context;
 
-    public CrustRepository Stores { get; }
-    public CrustRepository Customers { get; }
+    public StoreRepository Stores { get; }
+    public CustomerRepository Customers { get; }
     public CrustRepository Crusts { get; }
     public OrderRepository Orders { get; set; }
     public PizzaRepository Pizzas { get; set; }
@@ -20,8 +20,8 @@ namespace PizzaBox.Storing
       _context = context;
 
       Crusts = new CrustRepository(_context);
-      Customers = new CrustRepository(_context);
-      Stores = new CrustRepository(_context);
+      Customers = new CustomerRepository(_context);
+      Stores = new StoreRepository(_context);
       Orders = new OrderRepository(_context);
       Pizzas = new PizzaRepository(_context);
       Sizes = new SizeRepository(_context);
