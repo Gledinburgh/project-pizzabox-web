@@ -4,95 +4,6 @@ Not impressed with UberEats, DoorDash, GrubHub pizza offerings?
 You can now try PizzaBox, the latest food delivery service.
 It is a command line-based application focused on nothing but pizzas.
 
-## as a minimum viable product
-
-- should be an mvp (minimum viable product) status (20 hours)
-  - able to at least place an order with 1 pizza
-  - able to at least have 10 total validation unit tests for Customer, Order, Pizza, Store
-  - able to save a placed order including customer info, pizza info, store info
-
-## as a customer
-
-- should be able to launch the application
-- should be able to view all stores
-- should be able to select a store
-- should be to place an order
-- should be able to choose either custom or pre-set pizzas
-
-  for a custom pizza
-  - should be able to choose crust, size and toppings
-
-  for a preset pizza
-  - should be able to choose pizza and size
-
-- should be able to view a preview of the order in progress
-- should be able to modify the order in progress (add/remove pizza)
-- should be able to place/checkout the order in progress
-- should be able to view order history
-- should be able to make new order
-
-## as a store
-
-- should be able to launch the application
-- should be able to select options
-
-  for order history
-  - should be able to view all orders (including pizza count and total cost)
-  - should be able to view orders by customer
-
-  for sales
-  - should be able to view revenue by week (inluding pizza type and count)
-  - should be able to view revenue by month (including pizza type and count)
-
-## architecture
-
-- [solution] PizzaBox.sln
-  - [project - mvc] PizzaBox.Client.csproj
-    - [directory] Singletons
-  - [project - classlib] PizzaBox.Domain.csproj
-    - [directory] Abstracts
-    - [directory] Models
-  - [project - classlib ] PizzaBox.Storing.csproj
-    - [directory] Repositories
-  - [project - xunit] PizzaBox.Testing.csproj
-    - [directory] Tests
-
-## requirements
-
-The application is centered around the interaction of 4 main objects:
-- Customer
-- Order
-- Pizza
-- Store
-
-### store
-
-+ [required] there should exist at least 2 stores for a customer to choose from
-+ [required] each store should be able to view any and all of their placed orders
-+ [required] each store should be able to view any and all of their sales (weekly, monthly, quarterly)
-
-### order
-
-+ [required] each order must be able to modify its collection of pizzas
-+ [required] each order must be able to compute its pricing
-+ [required] each order must be limited to a total pricing of no more than $250
-+ [required] each order must be limited to a collection of pizzas of no more than 50
-
-### pizza
-
-+ [required] each pizza must be able to have a crust
-+ [required] each pizza must be able to have a size
-+ [required] each pizza must be able to have toppings
-+ [required] each pizza must be able to compute its pricing
-+ [required] each pizza must have no less than 2 default toppings
-+ [required] each pizza must have no more than 5 total toppings
-
-### customer
-
-+ [required] must be able to view its order history
-+ [required] must be able to only order from 1 location in a 24-hour period with no reset
-+ [required] must be able to only order once in a 2-hour period
-
 ## technologies
 
 + .NET Core - C#
@@ -100,10 +11,45 @@ The application is centered around the interaction of 4 main objects:
 + .NET Core - xUnit
 + ASP.NET Core - MVC
 
-## timelines
+### Current features available on PizzaBox 
 
-- code-freeze on May-10 at 11.59p Central
-- presentation on May-11 starting at 1.00p Central
-- try to implement as many requirements as you can (don't push to get all done)
+- A customer is able to view all stores and make a selection 
+- A customer is able to place an order for both custom and pre-set pizzas
+- A customer is able to select Size, toppings, and crust type for their pizzas
+- A customer is able to view previously placed order
 
-> the goal is to try to complete as many reqs as you can in the time alloted. :)
+### To-do list:
+- Add more form validation
+- Implement functionality specific to store employees
+
+## Getting started
+
+git clone https://github.com/Gledinburgh/project-pizzabox-web.git
+
+### Development server
+
+From PizzaBox.Client directory, run `dotnet run` for a dev server. Navigate to `http://localhost:5000/home/index`. 
+
+### Build
+
+Run `dotnet build` to build the project. The build artifacts will be stored in the `dist/` directory. 
+
+### Running unit tests
+
+Run `dotnet test` to execute the unit tests via [Xunit](https://github.com/xunit/xunit).
+
+## Usage
+
+- Navigate the main page at localhost:5000/home/index
+- Input name and select next
+- Select the desired store you wish to order from
+- Select the desired pizza you wish to order
+- Select the desired crust, toppings, and size for your pizza
+- Select from a list of final actions such as "order history" or "Place order" 
+
+## Contributors
+- Glenn Edinbourgh
+
+## License
+
+This project uses the following license: MIT
